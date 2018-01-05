@@ -32,13 +32,31 @@
     $(function(){
         var h5 = new H5();
 
-            h5.addPage('face','首页')
-                    .addComponent('logo',{text:'logo'})
-                    .addComponent('slogan',{text:'slogan'})
-                .addPage('desc','核心理念')
-                    .addComponent('caption',{text:'核心理念'})
-                h5.addPage('page-3','课程方向分布')
-                    .addComponent('caption',{text:'课程方向分布'})
+            h5.addPage('face')
+                    .addComponent('logo',{
+                        text:'logo',
+                        width:'400',
+                        height:100,
+                        css:{background:'red',top:200,opacity:0},
+                        center:true,
+                        animateIn:{opacity:1},
+                        animateOut:{opacity:0}
+                    })
+                    .addComponent('slogan',{
+                        text:'slogan',
+                        width:'400',
+                        height:100,
+                        css:{background:'red',top:350},
+                        center:true
+                    })
+                .addPage('desc')
+                    .addComponent('caption',{
+                        text:'核心理念'
+                    })
+                .addPage('page-3')
+                    .addComponent('caption',{
+                        text:'课程方向分布'
+                    })
                 .loader();
     })
     </script>

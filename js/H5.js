@@ -28,8 +28,8 @@ var H5 = function(){
         cfg = $.extend({
             type: 'base'
         },cfg);
-        var component;  
-        var page = this.page.slice(-1)[0];//定义一个变量，存储 组件元素
+        var component;  //定义一个变量，存储 组件元素
+        var page = this.page.slice(-1)[0];
         switch(cfg.type){
             case 'base':
                 component = new H5ComponentBase(name,cfg);
@@ -41,7 +41,15 @@ var H5 = function(){
     }
     // H5对象初始化呈现
     this.loader = function(){
-        this.el.fullpage();
+        this.el.fullpage({
+            onLeave:function(index,nextIndex,direction){
+                $(this).find('.h5_component').trigger('onLeave');
+            },
+            afterLoad:function(anchorLink,index){
+                $(this).find('.h5_component').trigger('onLoad');
+            }
+        });
+        this.page[0].find('.h5_component').trigger('onLoad');
         this.el.show();
     }
     return this;
