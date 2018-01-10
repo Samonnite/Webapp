@@ -11,6 +11,7 @@ var H5ComponentBase = function(name,cfg){
     cfg.text&& component.text(cfg.text);
     cfg.width && component.width(cfg.width/2);
     cfg.height && component.height(cfg.height/2);
+
     cfg.css && component.css(cfg.css);
     cfg.bg && component.css('backgroundImage','url('+cfg.bg+')');
 
@@ -21,25 +22,17 @@ var H5ComponentBase = function(name,cfg){
         })
     }
     //... 自定义参数
-    if(typeof cfg.onclick === 'function'){
-        component.on('click',cfg.onclick);
-    }
 
-	component.on('onLoad',function() {
-		setTimeout(function () {
-			component.addClass(cla+'_load').removeClass(cla+'_leave');
-			cfg.animateIn && component.animate(cfg.animateIn);
-        }, cfg.delay || 0);
+    component.on('onLoad',function(){
+        component.addClass(cls+'_load').removeClass(cls+'_leave');
+        cfg.animateIn && component.animate(cfg.animateIn);
         return false;
-	});
-	component.on('onLeave',function () {
-		setTimeout(function () {
-			component.addClass(cla+'_leave').removeClass(cla+'_load');
-			cfg.animateOut && component.animate(cfg.animateOut);
-		}, cfg.delay || 0);
-		return false;
-	});
-
+    })
+    component.on('onLeave',function(){        
+        component.addClass(cls+'_leave').removeClass(cls+'_load');
+        cfg.animateOut && component.animate(cfg.animateOut);
+        return false;
+    })
 
     return component;
 }
